@@ -38,7 +38,13 @@ font = pygame.font.SysFont(None,55)
 def text_screen(text,color,x,y):
     screen_text = font.render(text,True,color)
     gameWindow.blit(screen_text,[x,y])
-    
+   
+snk_list = []
+snk_length = 1
+def plot_snake(gameWindow,color,snk_list,snake_size):
+    for x,y in snk_list:
+        pygame.draw.rect(gameWindow,color,[x,y,snake_size,snake_size])
+        
     
 
 # creating a game loop
@@ -67,13 +73,23 @@ while not exit_game:
     if abs(snake_x - food_x) < 6 and abs(snake_y - food_y) < 66:
         score += 1
         food_x = random.randint(20, int(screen_width / 2))
-        food_y = random.randint(20, int(screen_height / 2))    
+        food_y = random.randint(20, int(screen_height / 2)) 
+        snk_length += 5
+           
     gameWindow.fill(white)
     text_screen("Score: "+str(score*10),red,5,5)
     # snake food
     pygame.draw.rect(gameWindow,red,[food_x,food_y,snake_size,snake_size])
     # snake head
-    pygame.draw.rect(gameWindow,black,[snake_x,snake_y,snake_size,snake_size]) 
+    head = []
+    head.append(snake_x)
+    head.append(snake_y)
+    snk_list.append(head)
+    
+    if len(snk_list)>snk_length:
+        del snk_list[0]
+    # pygame.draw.rect(gameWindow,black,[snake_x,snake_y,snake_size,snake_size]) 
+    plot_snake(gameWindow,black,snk_list,snake_size)
     pygame.display.update()
     clock.tick(fps)
 
