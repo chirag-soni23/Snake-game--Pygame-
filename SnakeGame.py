@@ -70,7 +70,7 @@ while not exit_game:
     snake_x += velocity_x
     snake_y += velocity_y
     
-    if abs(snake_x - food_x) < 6 and abs(snake_y - food_y) < 66:
+    if abs(snake_x - food_x) < 6 and abs(snake_y - food_y) < 6:
         score += 1
         food_x = random.randint(20, int(screen_width / 2))
         food_y = random.randint(20, int(screen_height / 2)) 
