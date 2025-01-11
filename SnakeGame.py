@@ -29,11 +29,17 @@ init_velocity = 5
 food_x = random.randint(20, int(screen_width / 2))
 food_y = random.randint(20, int(screen_height / 2))
 
-snake_size = 10
+snake_size = 20
 fps = 60
 
 # clock
 clock = pygame.time.Clock()
+font = pygame.font.SysFont(None,55)
+def text_screen(text,color,x,y):
+    screen_text = font.render(text,True,color)
+    gameWindow.blit(screen_text,[x,y])
+    
+    
 
 # creating a game loop
 while not exit_game:
@@ -60,10 +66,10 @@ while not exit_game:
     
     if abs(snake_x - food_x) < 6 and abs(snake_y - food_y) < 66:
         score += 1
-        print(f"Score: {score * 10}")
         food_x = random.randint(20, int(screen_width / 2))
         food_y = random.randint(20, int(screen_height / 2))    
     gameWindow.fill(white)
+    text_screen("Score: "+str(score*10),red,5,5)
     # snake food
     pygame.draw.rect(gameWindow,red,[food_x,food_y,snake_size,snake_size])
     # snake head
