@@ -55,7 +55,7 @@ def gameloop():
         
         if game_over:
             gameWindow.fill(white)
-            text_screen("Game Over! Press Enter To Continue",red,screen_width/2,screen_height/2)
+            text_screen("Game Over! Press Enter To Continue",red,100,200)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit_game = True
