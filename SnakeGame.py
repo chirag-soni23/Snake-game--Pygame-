@@ -1,4 +1,5 @@
 import pygame
+import random
 pygame.init()
 
 # colors
@@ -19,9 +20,13 @@ pygame.display.update()
 exit_game = False
 game_over = False
 snake_x = 45
+velocity_x = 0
+velocity_y = 0
 snake_y = 55
 snake_size = 10
 fps = 30
+food_x = random.randint(0,screen_width)
+food_y = random.randint(0,screen_height)
 
 # clock
 clock = pygame.time.Clock()
@@ -33,17 +38,24 @@ while not exit_game:
             exit_game = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                snake_x += 10    
+                velocity_x = 10
+                velocity_y = 0   
             if event.key == pygame.K_LEFT:
-                snake_x -= 10    
+                velocity_x = -10  
+                velocity_y = 0  
             if event.key == pygame.K_UP:
-                snake_y -= 10    
+                velocity_y = -10 
+                velocity_x = 0   
             if event.key == pygame.K_DOWN:
-                snake_y += 10    
+                velocity_y = 10  
+                velocity_x = 0 
             
     
-    
+    snake_x += velocity_x
+    snake_y += velocity_y
     gameWindow.fill(white)
+    # snake food
+    pygame.draw.rect(gameWindow,red,[food_x,food_y,snake_size,snake_size])
     # snake head
     pygame.draw.rect(gameWindow,black,[snake_x,snake_y,snake_size,snake_size]) 
     pygame.display.update()
