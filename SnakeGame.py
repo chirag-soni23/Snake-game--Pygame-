@@ -104,6 +104,8 @@ def gameloop():
                 del snk_list[0]
             
             # game over
+            if head in snk_list[:-1]:
+                game_over = True
             if snake_x < 0 or snake_x > screen_width or snake_y < 0 or snake_y > screen_height:
                 game_over = True   
             # pygame.draw.rect(gameWindow,black,[snake_x,snake_y,snake_size,snake_size]) 
