@@ -1,7 +1,12 @@
 import pygame
 import random
 
+
+pygame.mixer.init()
+
 pygame.init()
+
+
 
 # Colors
 white = (233,220,229)
@@ -16,6 +21,10 @@ screen_height = 600
 gameWindow = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Snake Game")
 pygame.display.update()
+
+#background image
+bgimg = pygame.image.load("snake.jpeg")
+bgimg = pygame.transform.scale(bgimg,(screen_width,screen_height)).convert_alpha()
 
 # Clock and font
 clock = pygame.time.Clock()
@@ -49,6 +58,8 @@ def welcome():
                 exit_game = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    pygame.mixer.music.load('back.mp3')
+                    pygame.mixer.music.play()
                     gameloop()
 
         pygame.display.update()
@@ -132,6 +143,7 @@ def gameloop():
                     hiscore = score
 
             gameWindow.fill(white)
+            gameWindow.blit(bgimg,(0,0))
             text_screen(f"Score: {score}  High Score: {hiscore}", red, 5, 5)
 
             # Draw food
@@ -147,6 +159,8 @@ def gameloop():
             # Collision with itself or walls
             if head in snk_list[:-1] or snake_x < 0 or snake_x > screen_width or snake_y < 0 or snake_y > screen_height:
                 game_over = True
+                pygame.mixer.music.load('gameover.mp3')
+                pygame.mixer.music.play()
 
             plot_snake(gameWindow, black, snk_list, snake_size)
 
