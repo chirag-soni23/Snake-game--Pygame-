@@ -97,7 +97,8 @@ def gameloop():
                     if event.key == pygame.K_DOWN:
                         velocity_y = init_velocity
                         velocity_x = 0
-
+                    if event.key == pygame.K_q:
+                        score += 5
             snake_x += velocity_x
             snake_y += velocity_y
 
