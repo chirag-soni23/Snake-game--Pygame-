@@ -6,6 +6,7 @@ pygame.init()
 white = (255, 255, 255)
 red = (255, 0, 0)
 black = (0, 0, 0)
+green = (0, 255, 0)
 
 screen_width = 900
 screen_height = 600
@@ -26,8 +27,11 @@ def text_screen(text, color, x, y):
 
 
 def plot_snake(gameWindow, color, snk_list, snake_size):
-    for x, y in snk_list:
-        pygame.draw.rect(gameWindow, color, [x, y, snake_size, snake_size])
+    for i, (x, y) in enumerate(snk_list):
+        if i == len(snk_list) - 1:  # Snake head (last element) will be green
+            pygame.draw.rect(gameWindow, green, [x, y, snake_size, snake_size])
+        else:  # Remaining body in black
+            pygame.draw.rect(gameWindow, color, [x, y, snake_size, snake_size])
 
 
 # Creating a game loop
